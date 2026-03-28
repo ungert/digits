@@ -1,6 +1,6 @@
 'use client';
 
-import { useSession } from 'next-auth/react'; // v5 compatible
+import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { BoxArrowRight, Lock, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
@@ -8,57 +8,64 @@ import { BoxArrowRight, Lock, PersonFill, PersonPlusFill } from 'react-bootstrap
 const NavBar: React.FC = () => {
   const { data: session, status } = useSession();
   const pathName = usePathname();
+
   if (status === 'loading') return null;
+
   const currentUser = session?.user?.email;
   const role = session?.user?.role;
+
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar style={{ backgroundColor: '#0d3b66' }} variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/">Next.js Application Template</Navbar.Brand>
+        <Navbar.Brand href="/">digits</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+
           <Nav className="me-auto justify-content-start">
             {currentUser && (
               <>
-                <Nav.Link id="add-stuff-nav" href="/add" active={pathName === '/add'}>
+                <Nav.Link href="/add" active={pathName === '/add'}>
                   Add Stuff
                 </Nav.Link>
-                <Nav.Link id="list-stuff-nav" href="/list" active={pathName === '/list'}>
+                <Nav.Link href="/list" active={pathName === '/list'}>
                   List Stuff
                 </Nav.Link>
               </>
             )}
+
             {currentUser && role === 'ADMIN' && (
-              <Nav.Link id="admin-stuff-nav" href="/admin" active={pathName === '/admin'}>
+              <Nav.Link href="/admin" active={pathName === '/admin'}>
                 Admin
               </Nav.Link>
             )}
           </Nav>
-          <Nav>
+
+          <Nav className="justify-content-end">
             {session ? (
-              <NavDropdown id="login-dropdown" title={currentUser}>
-                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
+              <NavDropdown title={currentUser}>
+                <NavDropdown.Item href="/api/auth/signout">
                   <BoxArrowRight />
-                  Sign Out
+                  {' '}Sign Out
                 </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
+                <NavDropdown.Item href="/auth/change-password">
                   <Lock />
-                  Change Password
+                  {' '}Change Password
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <NavDropdown id="login-dropdown" title="Login">
-                <NavDropdown.Item id="login-dropdown-sign-in" href="/auth/signin">
+              <NavDropdown title="Login">
+                <NavDropdown.Item href="/auth/signin">
                   <PersonFill />
-                  Sign in
+                  {' '}Sign in
                 </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-sign-up" href="/auth/signup">
+                <NavDropdown.Item href="/auth/signup">
                   <PersonPlusFill />
-                  Sign up
+                  {' '}Sign up
                 </NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
