@@ -28,7 +28,7 @@ const NavBar: React.FC = () => {
                   Add Stuff
                 </Nav.Link>
                 <Nav.Link href="/list" active={pathName === '/list'}>
-                  List Stuff
+                  List Contacts
                 </Nav.Link>
               </>
             )}
@@ -45,22 +45,26 @@ const NavBar: React.FC = () => {
               <NavDropdown title={currentUser}>
                 <NavDropdown.Item href="/api/auth/signout">
                   <BoxArrowRight />
-                  {' '}Sign Out
+                  {' '}
+                  Sign Out
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/auth/change-password">
                   <Lock />
-                  {' '}Change Password
+                  {' '}
+                  Change Password
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <NavDropdown title="Login">
                 <NavDropdown.Item href="/auth/signin">
                   <PersonFill />
-                  {' '}Sign in
+                  {' '}
+                  Sign in
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/auth/signup">
                   <PersonPlusFill />
-                  {' '}Sign up
+                  {' '}
+                  Sign up
                 </NavDropdown.Item>
               </NavDropdown>
             )}
