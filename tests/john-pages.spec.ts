@@ -2,7 +2,6 @@ import { test, expect } from './auth-utils';
 
 test.slow();
 test('can authenticate a specific user', async ({ getUserPage }) => {
-
   // Call the getUserPage fixture with users signin info to get authenticated session for user
   const customUserPage = await getUserPage('john@foo.com', 'changeme');
 
@@ -14,20 +13,19 @@ test('can authenticate a specific user', async ({ getUserPage }) => {
 
   // Now check for navigation links and headings
   await expect(
-    customUserPage.getByRole('link', { name: 'Add Stuff' })
+    customUserPage.getByRole('link', { name: 'Add Contact' })
   ).toBeVisible({ timeout: 5000 });
   await expect(
-    customUserPage.getByRole('link', { name: 'List Stuff' })
+    customUserPage.getByRole('link', { name: 'List Contacts' })
   ).toBeVisible({ timeout: 5000 });
 
-  await customUserPage.getByRole('link', { name: 'Add Stuff' }).click();
+  await customUserPage.getByRole('link', { name: 'Add Contact' }).click();
   await expect(
-    customUserPage.getByRole('heading', { name: 'Add Stuff' })
+    customUserPage.getByRole('heading', { name: 'Add Contact' })
   ).toBeVisible({ timeout: 5000 });
 
-  await customUserPage.getByRole('link', { name: 'List Stuff' }).click();
+  await customUserPage.getByRole('link', { name: 'List Contacts' }).click();
   await expect(
-    customUserPage.getByRole('heading', { name: 'Stuff' })
+    customUserPage.getByRole('heading', { name: 'List Contacts' })
   ).toBeVisible({ timeout: 5000 });
-
 });
