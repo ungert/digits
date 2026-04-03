@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, Image } from 'react-bootstrap';
 import { Contact } from '@/lib/validationSchemas';
 
@@ -24,6 +25,9 @@ const ContactCard = ({ contact }: ContactCardProps) => (
     <Card.Body>
       <Card.Text>{contact.description}</Card.Text>
     </Card.Body>
+    <Card.Footer>
+      <Link href={`/edit/${contact.id}`}>Edit</Link>
+    </Card.Footer>
   </Card>
 );
 
