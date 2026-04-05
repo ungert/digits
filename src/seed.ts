@@ -60,4 +60,4 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
-  
+  // To run this script, use the comm

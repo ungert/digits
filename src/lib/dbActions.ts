@@ -17,6 +17,8 @@ export async function addStuff(stuff: { name: string; quantity: number; owner: s
     condition = 'poor';
   } else if (stuff.condition === 'excellent') {
     condition = 'excellent';
+  } else if (stuff.condition === 'good') {
+    condition = 'good';
   } else {
     condition = 'fair';
   }
@@ -61,6 +63,58 @@ export async function deleteStuff(id: number) {
     where: { id },
   });
   // After deleting, redirect to the list page
+  redirect('/list');
+}
+
+/**
+ * Adds a new contact to the database.
+ * @param contact, an object with the following properties: firstName, lastName, address, image, description, owner.
+ */
+export async function addContact(contact: {
+  firstName: string;
+  lastName: string;
+  address: string;
+  image: string;
+  description: string;
+  owner: string;
+}) {
+  await prisma.contact.create({
+    data: {
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      address: contact.address,
+      image: contact.image,
+      description: contact.description,
+      owner: contact.owner,
+    },
+  });
+  redirect('/list');
+}
+
+/**
+ * Edits an existing contact in the database.
+ * @param contact, an object with the following properties: id, firstName, lastName, address, image, description, owner.
+ */
+export async function editContact(contact: {
+  id: number;
+  firstName: string;
+  lastName: string;
+  address: string;
+  image: string;
+  description: string;
+  owner: string;
+}) {
+  await prisma.contact.update({
+    where: { id: contact.id },
+    data: {
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      address: contact.address,
+      image: contact.image,
+      description: contact.description,
+      owner: contact.owner,
+    },
+  });
   redirect('/list');
 }
 
